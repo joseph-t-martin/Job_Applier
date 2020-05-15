@@ -95,7 +95,6 @@ def process_seek_application(driver, session, seek_job_data):
         job.submitted = True
     except Exception as e:
         print('Issue submitting application')
-        print(e)
         job.submitted = False
 
     job.site_id = 1
@@ -106,6 +105,7 @@ def process_seek_application(driver, session, seek_job_data):
     session.add(job)
     session.commit()
 
-    print('Submitted application for job: ' + str(seek_job_data['url']))
+    if job.submitted:
+        print('Submitted application for job: ' + str(seek_job_data['url']))
 
     return True
