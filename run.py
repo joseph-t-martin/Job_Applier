@@ -6,15 +6,11 @@ import os
 from models.sites import Sites
 from services.general import scraper
 from services.seek import seek_sign_in, format_seek_data, process_seek_application
-# TODO: Better way to set site url
-# TODO: Add readme
 
 
 if __name__ == '__main__':
     load_dotenv()
 
-    print(os.getenv('SEEK_USERNAME'))
-    print(os.getenv('DATABASE_USERNAME'))
     engine = create_engine("mysql+pymysql://{0}:{1}@{2}/{3}".format(
         os.getenv('DATABASE_USERNAME'),
         os.getenv('DATABASE_PASSWORD'),
@@ -29,7 +25,8 @@ if __name__ == '__main__':
     options.add_argument("--auto-open-devtools-for-tabs")
     options.add_experimental_option("excludeSwitches", ["enable-automation"])
     options.add_experimental_option('useAutomationExtension', False)
-    driver = webdriver.Chrome('/Users/joseph/Code/Job_Applier/chromedriver', options=options)
+
+    driver = webdriver.Chrome(os.getcwd() + '/chromedriver', options=options)
 
     seek_sign_in(driver)
     sites = session.query(Sites).all()

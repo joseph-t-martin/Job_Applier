@@ -1,7 +1,6 @@
 from models.sites import Sites
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String, ForeignKey, Boolean, DateTime
-from sqlalchemy.sql import func
 Base = declarative_base()
 
 
