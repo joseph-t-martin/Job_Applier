@@ -22,7 +22,6 @@ if __name__ == '__main__':
 
     options = webdriver.ChromeOptions()
     options.add_argument("start-maximized")
-    options.add_argument("--auto-open-devtools-for-tabs")
     options.add_experimental_option("excludeSwitches", ["enable-automation"])
     options.add_experimental_option('useAutomationExtension', False)
 

@@ -12,6 +12,7 @@ def seek_sign_in(web_driver):
     """
 
     web_driver.get('https://www.seek.com.au/sign-in')
+    time.sleep(3)
     web_driver.find_element_by_id('email').send_keys(os.getenv('SEEK_USERNAME'))
     web_driver.find_element_by_id('password').send_keys(os.getenv('SEEK_PASSWORD'))
     web_driver.find_element_by_xpath('//button[@data-automation="signin-submit"]').click()
@@ -75,18 +76,22 @@ def process_seek_application(driver, session, seek_job_data):
         select.select_by_value('0')
         time.sleep(5)
 
-        driver.find_element_by_xpath('//button[@data-testid="continue-button-mobile"]').click()
+        driver.find_element_by_xpath('//button[@data-testid="continue-button"]').click()
         time.sleep(20)
 
         # Part 2 Questions (optional)
-        if driver.find_element_by_xpath('//button[@data-testid="continue-button-mobile"]'):
-            driver.find_element_by_xpath('//button[@data-testid="continue-button-mobile"]').click()
+        try:
+            driver.find_element_by_xpath('//button[@data-testid="continue-button"]').click()
             time.sleep(3)
+        except:
+            pass
 
         # Part 3 Update seek
-        if driver.find_element_by_xpath('//button[@data-testid="continue-button-mobile"]'):
-            driver.find_element_by_xpath('//button[@data-testid="continue-button-mobile"]').click()
+        try:
+            driver.find_element_by_xpath('//button[@data-testid="continue-button"]').click()
             time.sleep(3)
+        except:
+            pass
 
         # Part 4 Review and Submit
         driver.find_element_by_xpath('//button[@data-testid="review-submit-application"]').click()
